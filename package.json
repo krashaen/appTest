@@ -1,0 +1,27 @@
+{
+  "name": "appTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-styles": "./node_modules/.bin/stylus ./app/app.styl -o ./build/main.css",
+    "compile-templates": "node ./node_modules/.bin/pug ./app/app.jade --out ./build",
+    "start": "npm run compile-styles && npm run compile-templates",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krashaen/appTest.git"
+  },
+  "author": "Misha Krasheninnikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krashaen/appTest/issues"
+  },
+  "homepage": "https://github.com/krashaen/appTest#readme",
+  "devDependencies": {
+    "pug": "^2.0.0-beta6",
+    "pug-cli": "^1.0.0-alpha6",
+    "stylus": "^0.54.5"
+  }
+}
