@@ -1,9 +1,10 @@
 .profile-photo
-    padding-top 30px
-    margin: 0;
+    padding-top: 30px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    max-width: 95%;
+    margin: 0 auto;;
 
     &__image
         width 46px
@@ -18,13 +19,12 @@
         color red
 
 .user-info
-    width 30%
+    width 20%
     background-color #ffffff
     min-height 100px
 
 .posts 
-    width 70%
-    height 100px
+    width 80%
     background-color #ffffff
 
 .posts-line
@@ -37,3 +37,33 @@
     justify-content flex-start
     align-items center 
     cursor pointer
+
+.post-title {
+    font-size: 2.16667em;
+    font-weight: 700;
+    line-height: 140%;
+    color: #4e5056;
+    margin: 0;
+}
+
+.description {
+    font: 400 18px/1.6 Brandon Text,sans-serif;
+    color: #4e5056;
+    margin: 0;
+}
+
+.send {
+    color: #fff;
+    background-color: #ef5350;
+    width: 140px;
+    height: 45px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    margin: 3%;
+}
+
+.post {
+  margin: 5%;
+}
