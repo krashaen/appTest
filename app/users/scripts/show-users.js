@@ -1,5 +1,6 @@
 var usersList = {};
 var posts = {};
+var comments = {};
 var root = 'http://jsonplaceholder.typicode.com';
 var users = document.getElementsByClassName('users-list');
 $.ajax({
@@ -8,11 +9,19 @@ $.ajax({
 }).then(function(data) {
     usersList = data;
 });
+
 $.ajax({
   url: root + '/posts',
   method: 'GET'
 }).then(function(data) {
     posts = data;
+});
+
+$.ajax({
+  url: root + '/comments',
+  method: 'GET'
+}).then(function(data) {
+    comments = data;
 });
 
 var view = {
@@ -50,7 +59,8 @@ var view = {
         newCell = newRow.insertCell(-1);
         newCell.innerHTML = usersList[id].name;
         newCell = newRow.insertCell(-1);
-        newCell.onclick = this.showPost;
+        newCell.className = 'dgfdgd';
+        newCell.onclick = view.showPost;
         newCell.innerHTML = usersList[id].username;
         newCell = newRow.insertCell(-1);
         newCell.innerHTML = usersList[id].company.name;
@@ -58,9 +68,15 @@ var view = {
         newCell.innerHTML = usersList[id].email;
     },
 
-    showPost: function(id){
+    showPost: function(userid){
         for(var i = 0; i < posts.length; i++) {
-            if(posts[i].userId === id) console.log(posts[i]);
+            if(posts[i].userId === userid) console.log(posts[i]);
+        }
+    },
+
+    showPostComment: function(postid){
+        for(var i = 0; i < comments.length; i++) {
+            if(comments[i].postId === postid) console.log(comments[i]);
         }
     }
 };
