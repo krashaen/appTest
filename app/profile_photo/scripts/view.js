@@ -63,16 +63,16 @@ var view = {
             var commentBtn = null;
             var postLine = null;
             var parentBlok = null;
+            var t = null;
 
-            //parentBlok = document.getElementsByClassName('profile-photo');
             userid1 = parseInt(this.getAttribute('id'));
+            parentBlok = document.getElementsByClassName('profile-photo');
             postBloks = document.getElementsByClassName('posts');
-            //parentBlok[0].removeChild(postBloks);
+            postBloks[0].remove();
 
-            //postBloks = document.createElement('div');
-            //postBloks.className = 'profile-photo';
-            //parentBlok[0].appendChild(postBloks);
-
+            postBloks[0] = document.createElement('div');
+            postBloks[0].className = 'posts posts-line';
+            parentBlok[0].appendChild(postBloks[0]);
             for(var i = 0; i < posts.length; i++) {
                 if(posts[i].userId === userid1) {
                     post = document.createElement('div');
