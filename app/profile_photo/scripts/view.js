@@ -1,6 +1,6 @@
-
 var usersList ={};
 var posts = {};
+var comments = {};
 var root = 'http://jsonplaceholder.typicode.com';
 
 $.ajax({
@@ -8,6 +8,7 @@ $.ajax({
   method: 'GET'
 }).then(function(data) {
     usersList = data;
+    view.showUsers();
 });
 
 $.ajax({
@@ -15,6 +16,13 @@ $.ajax({
   method: 'GET'
 }).then(function(data) {
     posts = data;
+});
+
+$.ajax({
+  url: root + '/comments',
+  method: 'GET'
+}).then(function(data) {
+    comments = data;
 });
 
 var view = {
@@ -49,11 +57,6 @@ var view = {
         }
     },
 
-    showtest: function() {
-        
-        view.showPost(userId);
-    },
-
         showPost: function(){
             var userid1 = null;
             var postBloks = null;
@@ -61,6 +64,7 @@ var view = {
             var postTitle = null;
             var postDescr = null;
             var commentBtn = null;
+            var comments = null;
             var postLine = null;
             var parentBlok = null;
             var t = null;
@@ -78,6 +82,7 @@ var view = {
                     post = document.createElement('div');
                     post.className = 'post';
                     postBloks[0].appendChild(post);
+                    post.setAttribute('id', posts[i].id);
 
                     postTitle = document.createElement('h2');
                     postTitle.className = 'post-title';
@@ -92,15 +97,36 @@ var view = {
                     post.appendChild(postDescr);
                     postDescr.textContent = posts[i].body;
 
+                    comments = document.createElement('div');
+                    comments.className = 'post-comments';
+                    post.appendChild(comments);
+                    comments.setAttribute('id', posts[i].id);
+
                     commentBtn = document.createElement('input');
-                    commentBtn.type = 'submit';
+                    commentBtn.type = 'button';
                     commentBtn.className = 'send';
                     commentBtn.value = 'Комментарии';
                     post.appendChild(commentBtn);
+                    commentBtn.onclick = view.showComents.bind(null, posts[i].id);
+                    //commentBtn.setAttribute('postId', posts[i].id);
 
                 }
         }
     },
 
+    showComents: function(id) {
+        var commentBlock = null;
+
+        commentBlock = document.getElementsByClassName('post-comments');
+        for (var i = 0; i < comments.length; i++) {
+            if (comments[i].postId === id) commentBlock[id-1].textContent += comments[i].body + '\n' + '|||';
+        }
+    },
+
+    closeComments: function() {
+        alert('hi');
+    }
+
 
 };
+
