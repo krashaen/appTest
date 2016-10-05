@@ -103,7 +103,6 @@ var view = {
                     commentBtn.value = 'Комментарии';
                     post.appendChild(commentBtn);
                     commentBtn.onclick = view.showComents.bind(null, posts[i].id);
-                    //commentBtn.setAttribute('postId', posts[i].id);
 
                 }
         }
@@ -128,6 +127,7 @@ var view = {
                     if (postBlockId === id) {
                         comment = document.createElement('div');
                         comment.className = 'post-comments';
+                        comment.setAttribute('id', id)
                         postBlock[i].insertBefore(comment, postBlock[i].children[3]);
 
                         commentTitle = document.createElement('h2');
@@ -146,7 +146,7 @@ var view = {
                         comment.appendChild(commentUserEmail);
 
                         commentBtn[i].value = 'Закрыть';
-                        commentBtn[i].onclick = view.closeComments;
+                        commentBtn[i].onclick = view.closeComments.bind(null,id);
                     }
                 }
             }
@@ -154,10 +154,31 @@ var view = {
 
 },
 
-    closeComments: function() {
-        alert('hi');
-    }
+    closeComments: function(id) {
+        var allCommens = null;
+        var postBlockId = null;
+        var postBlockId = null;
+        var commentBtn = null;
+        var deleteComment = null;
 
+        
+        commentBtn = document.getElementsByClassName('send');
+        postBlock = document.getElementsByClassName('post');
+        allCommens = document.getElementsByClassName('post-comments');
+        deleteComment = document.querySelectorAll('.post .post-comments');
+        for (var i = 0; i < postBlock.length; i++) {
+            postBlockId = parseInt(postBlock[i].getAttribute('id'));
+            if (postBlockId === id) {
+                commentBtn[i].onclick = view.showComents.bind(null,id);
+                commentBtn[i].value = 'Комментарии';
+                deleteComment = postBlock[i].querySelectorAll('.post-comments');
+                for (var j = 0; j < deleteComment.length; j++) {
+                    postBlock[i].removeChild(postBlock[i].children[3]);
+                }
+            }
+        }
+
+    }
 
 };
 
