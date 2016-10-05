@@ -97,11 +97,6 @@ var view = {
                     post.appendChild(postDescr);
                     postDescr.textContent = posts[i].body;
 
-                    comments = document.createElement('div');
-                    comments.className = 'post-comments';
-                    post.appendChild(comments);
-                    comments.setAttribute('id', posts[i].id);
-
                     commentBtn = document.createElement('input');
                     commentBtn.type = 'button';
                     commentBtn.className = 'send';
@@ -115,13 +110,49 @@ var view = {
     },
 
     showComents: function(id) {
-        var commentBlock = null;
+        var postBlock = null;
+        var comment = null;
+        var postBlockId = null;
+        var commentTitle = null;
+        var commentBody = null;
+        var commentUserEmail = null;
+        var commentBtn = null;
 
-        commentBlock = document.getElementsByClassName('post-comments');
-        for (var i = 0; i < comments.length; i++) {
-            if (comments[i].postId === id) commentBlock[id-1].textContent += comments[i].body + '\n' + '|||';
+        commentBtn = document.getElementsByClassName('send');
+        postBlock = document.getElementsByClassName('post');
+        for (var j = 0; j < comments.length; j++) {
+            if (comments[j].postId === id) {
+            // create coment block
+                for (var i = 0; i < postBlock.length; i++) {
+                    postBlockId = parseInt(postBlock[i].getAttribute('id'));
+                    if (postBlockId === id) {
+                        comment = document.createElement('div');
+                        comment.className = 'post-comments';
+                        postBlock[i].insertBefore(comment, postBlock[i].children[3]);
+
+                        commentTitle = document.createElement('h2');
+                        commentTitle.className = 'comment-name';
+                        commentTitle.textContent = comments[j].name;
+                        comment.appendChild(commentTitle);
+
+                        commentBody = document.createElement('p');
+                        commentBody.className = 'comment-content';
+                        commentBody.textContent = comments[j].body;
+                        comment.appendChild(commentBody);
+
+                        commentUserEmail = document.createElement('div');
+                        commentUserEmail.className = 'user-email';
+                        commentUserEmail.textContent = comments[j].email;
+                        comment.appendChild(commentUserEmail);
+
+                        commentBtn[i].value = 'Закрыть';
+                        commentBtn[i].onclick = view.closeComments;
+                    }
+                }
+            }
         }
-    },
+
+},
 
     closeComments: function() {
         alert('hi');
