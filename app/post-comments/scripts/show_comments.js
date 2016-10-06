@@ -37,8 +37,6 @@ view.showComents = function(id) {
                     UserEmail.textContent = entry.email;
                     commentUserEmail.appendChild(UserEmail);
 
-
-
                     commentBtn[i].textContent = 'Закрыть';
                     commentBtn[i].setAttribute('href','#' + id );
                     commentBtn[i].onclick = view.closeComments.bind(null,id);
@@ -46,5 +44,4 @@ view.showComents = function(id) {
             }
         }
     })
-
 };

@@ -1,5 +1,5 @@
 view.showPost = function(){
-    var userid1 = null;
+    var userid = null;
     var postBloks = null;
     var post = null;
     var postTitle = null;
@@ -8,9 +8,8 @@ view.showPost = function(){
     var comments = null;
     var postLine = null;
     var parentBlok = null;
-    var t = null;
 
-    userid1 = parseInt(this.getAttribute('id'));
+    userid = parseInt(this.getAttribute('id'));
     parentBlok = document.getElementsByClassName('blog');
     postBloks = document.getElementsByClassName('posts-list');
     postBloks[0].remove();
@@ -19,7 +18,7 @@ view.showPost = function(){
     postBloks[0].className = 'posts-list blog__border';
     parentBlok[0].appendChild(postBloks[0]);
     posts.forEach(function(entry) {
-        if(entry.userId === userid1) {
+        if(entry.userId === userid) {
             post = document.createElement('div');
             post.className = 'posts-list__post';
             postBloks[0].appendChild(post);
