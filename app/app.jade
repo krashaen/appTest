@@ -5,4 +5,12 @@ html(lang="ru")
         meta(charset="utf-8")
         link(href="../build/main.css" rel="stylesheet")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
-    include profile_photo/profile_photo.jade
+        script(src="../app/script.js")
+        script(src="../app/users-list/scripts/show_users-list.js")
+        script(src="../app/posts-list/scripts/show_posts-list.js")
+        script(src="../app/post-comments/scripts/show_comments.js")
+        script(src="../app/post-comments/scripts/close_comments.js")
+    .blog
+        include users-list/users-list.jade
+        include posts-list/posts-list.jade
+        
