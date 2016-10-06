@@ -34,17 +34,16 @@ var view = {
         var userInfo = null;
         var userName = null;
         var userWrapper = null;
-        var userId = null;
+        var UserEmail = null;
 
         userInfo = document.getElementsByClassName('user-info');
-        for(var i = 0; i < usersList.length; i++) {
-            userId = usersList[i].id;
+        usersList.forEach(function(entry) {
 
             userWrapper = document.createElement('div');
             userWrapper.className = 'user-wrapper';
             userInfo[0].appendChild(userWrapper);
             userWrapper.onclick = view.showPost;
-            userWrapper.setAttribute('id', usersList[i].id);
+            userWrapper.setAttribute('id', entry.id);
 
             userPhoto = document.createElement('div');
             userPhoto.className = 'profile-photo__image';
@@ -53,8 +52,8 @@ var view = {
             userName = document.createElement('div');
             userName.className = 'profile-photo__user-name';
             userWrapper.appendChild(userName);
-            userName.textContent = usersList[i].name;
-        }
+            userName.textContent = entry.name;
+        })
     },
 
         showPost: function(){
@@ -77,17 +76,17 @@ var view = {
             postBloks[0] = document.createElement('div');
             postBloks[0].className = 'posts posts-line';
             parentBlok[0].appendChild(postBloks[0]);
-            for(var i = 0; i < posts.length; i++) {
-                if(posts[i].userId === userid1) {
+            posts.forEach(function(entry) {
+                if(entry.userId === userid1) {
                     post = document.createElement('div');
                     post.className = 'post';
                     postBloks[0].appendChild(post);
-                    post.setAttribute('id', posts[i].id);
+                    post.setAttribute('id', entry.id);
 
                     postTitle = document.createElement('h2');
                     postTitle.className = 'post-title';
                     post.appendChild(postTitle);
-                    postTitle.textContent = posts[i].title;
+                    postTitle.textContent = entry.title;
                     
                     postLine = document.createElement('hr');
                     post.appendChild(postLine);
@@ -95,17 +94,17 @@ var view = {
                     postDescr = document.createElement('p');
                     postDescr.className = 'description';
                     post.appendChild(postDescr);
-                    postDescr.textContent = posts[i].body;
+                    postDescr.textContent = entry.body;
 
                     commentBtn = document.createElement('input');
                     commentBtn.type = 'button';
                     commentBtn.className = 'send';
                     commentBtn.value = 'Комментарии';
                     post.appendChild(commentBtn);
-                    commentBtn.onclick = view.showComents.bind(null, posts[i].id);
+                    commentBtn.onclick = view.showComents.bind(null, entry.id);
 
                 }
-        }
+        })
     },
 
     showComents: function(id) {
@@ -119,8 +118,8 @@ var view = {
 
         commentBtn = document.getElementsByClassName('send');
         postBlock = document.getElementsByClassName('post');
-        for (var j = 0; j < comments.length; j++) {
-            if (comments[j].postId === id) {
+        comments.forEach(function(entry) {
+            if (entry.postId === id) {
             // create coment block
                 for (var i = 0; i < postBlock.length; i++) {
                     postBlockId = parseInt(postBlock[i].getAttribute('id'));
@@ -132,25 +131,29 @@ var view = {
 
                         commentTitle = document.createElement('h2');
                         commentTitle.className = 'comment-name';
-                        commentTitle.textContent = comments[j].name;
+                        commentTitle.textContent = entry.name;
                         comment.appendChild(commentTitle);
 
                         commentBody = document.createElement('p');
                         commentBody.className = 'comment-content';
-                        commentBody.textContent = comments[j].body;
+                        commentBody.textContent = entry.body;
                         comment.appendChild(commentBody);
 
                         commentUserEmail = document.createElement('div');
                         commentUserEmail.className = 'user-email';
-                        commentUserEmail.textContent = comments[j].email;
                         comment.appendChild(commentUserEmail);
+                        UserEmail = document.createElement('address');
+                        UserEmail.textContent = entry.email;
+                        commentUserEmail.appendChild(UserEmail);
+
+
 
                         commentBtn[i].value = 'Закрыть';
                         commentBtn[i].onclick = view.closeComments.bind(null,id);
                     }
                 }
             }
-        }
+        })
 
 },
 
@@ -172,9 +175,9 @@ var view = {
                 commentBtn[i].onclick = view.showComents.bind(null,id);
                 commentBtn[i].value = 'Комментарии';
                 deleteComment = postBlock[i].querySelectorAll('.post-comments');
-                for (var j = 0; j < deleteComment.length; j++) {
+                deleteComment.forEach(function(entry) {
                     postBlock[i].removeChild(postBlock[i].children[3]);
-                }
+                });
             }
         }
 
