@@ -16,7 +16,7 @@ view.closeComments = function(id) {
             commentBtn[i].onclick = view.showComents.bind(null,id);
             commentBtn[i].textContent = 'Комментарии';
             deleteComment = postBlock[i].querySelectorAll('.post-comments');
-            deleteComment.forEach(function(entry) {
+            Array.prototype.slice.call(deleteComment).forEach(function(entry) {
                 postBlock[i].removeChild(postBlock[i].children[3]);
             });
         }
