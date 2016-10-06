@@ -14,14 +14,14 @@ view.showPost = function(){
     postBloks = document.getElementsByClassName('posts-list');
     postBloks[0].remove();
 
-    postBloks[0] = document.createElement('div');
-    postBloks[0].className = 'posts-list blog__border';
-    parentBlok[0].appendChild(postBloks[0]);
+    postBloks = document.createElement('div');
+    postBloks.className = 'posts-list blog__border';
+    parentBlok[0].appendChild(postBloks);
     posts.forEach(function(entry) {
         if(entry.userId === userid) {
             post = document.createElement('div');
             post.className = 'posts-list__post';
-            postBloks[0].appendChild(post);
+            postBloks.appendChild(post);
             post.setAttribute('name', entry.id)
             post.setAttribute('id', entry.id);
 
