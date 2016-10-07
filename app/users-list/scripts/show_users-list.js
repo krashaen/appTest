@@ -3,11 +3,11 @@ view.showUsers = function() {
     var userInfo = null;
     var userName = null;
     var userWrapper = null;
-    var UserEmail = null;
+    var UserEmail = null; // lower camel case
 
     userInfo = document.getElementsByClassName('users-list');
     usersList.forEach(function(entry) {
-
+        // try to slice to smaller functions
         userWrapper = document.createElement('div');
         userWrapper.className = 'users-list__info';
         userInfo[0].appendChild(userWrapper);
@@ -22,5 +22,5 @@ view.showUsers = function() {
         userName.className = 'users-list__user-name';
         userWrapper.appendChild(userName);
         userName.textContent = entry.name;
-    })
+    });
 };

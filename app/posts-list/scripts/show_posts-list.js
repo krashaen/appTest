@@ -1,4 +1,4 @@
-view.showPost = function(){
+view.showPost = function() {
     var userid = null;
     var postBloks = null;
     var post = null;
@@ -9,8 +9,9 @@ view.showPost = function(){
     var postLine = null;
     var parentBlok = null;
 
+    // try to slice to different functions
     userid = parseInt(this.getAttribute('id'));
-    parentBlok = document.getElementsByClassName('blog');
+    parentBlok = document.getElementsByClassName('blog'); // better will be to pass this elements to arguments
     postBloks = document.getElementsByClassName('posts-list');
     postBloks[0].remove();
 
@@ -18,7 +19,7 @@ view.showPost = function(){
     postBloks.className = 'posts-list blog__border';
     parentBlok[0].appendChild(postBloks);
     posts.forEach(function(entry) {
-        if(entry.userId === userid) {
+        if (entry.userId === userid) {
             post = document.createElement('div');
             post.className = 'posts-list__post';
             postBloks.appendChild(post);
@@ -42,8 +43,11 @@ view.showPost = function(){
             commentBtn.className = 'posts-list__send';
             commentBtn.textContent = 'Комментарии';
             post.appendChild(commentBtn);
-            commentBtn.onclick = view.showComents.bind(null, entry.id);
-
+            commentBtn.onclick = onCommentBtnClick.bind(null, entry.id);
         }
-    })
+    });
+
+    function onCommentBtnClick(id) {
+        var comments = view.getComments(id);
+    }
 };
