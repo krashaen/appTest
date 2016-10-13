@@ -1,27 +1,38 @@
-var usersList ={};
-var posts = {};
-var comments = {};
-var root = 'http://jsonplaceholder.typicode.com';
-var view ={};
+const model = {
+    userList: null,
+    normalize() {
+        for (const user of this.userList) {
+            for (const post of this.postsList) {
+                if (user.id === post.userId) this.userList.posts = this.userList.posts.push(post);
+            }
+        }
+    },
+};
+
+const root = 'http://jsonplaceholder.typicode.com';
+const view = {};
 
 $.ajax({
-  url: root + '/users',
-  method: 'GET'
-}).then(function(data) {
-    usersList = data;
-    view.showUsers();
+    async: false,
+    url: `${root  }/users`,
+    method: 'GET',
+}).then((data) => {
+    model.userList = data;
+    model.normalize();
 });
 
 $.ajax({
-  url: root + '/posts',
-  method: 'GET'
-}).then(function(data) {
-    posts = data;
+    async: false,
+    url: `${root  }/posts`,
+    method: 'GET',
+}).then((data) => {
+    model.postsList = data;
 });
 
 $.ajax({
-  url: root + '/comments',
-  method: 'GET'
-}).then(function(data) {
-    comments = data;
+    async: false,
+    url: `${root  }/comments`,
+    method: 'GET',
+}).then((data) => {
+    model.commentList = data;
 });
