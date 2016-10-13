@@ -12,27 +12,21 @@ const model = {
 const root = 'http://jsonplaceholder.typicode.com';
 const view = {};
 
-$.ajax({
-    async: false,
-    url: `${root  }/users`,
-    method: 'GET',
-}).then((data) => {
-    model.userList = data;
-    model.normalize();
-});
+function load(type) {
+    return $.ajax({
+        url: `${root}/${type}`,
+        method: 'GET',
+    });
+}
 
-$.ajax({
-    async: false,
-    url: `${root  }/posts`,
-    method: 'GET',
-}).then((data) => {
-    model.postsList = data;
-});
-
-$.ajax({
-    async: false,
-    url: `${root  }/comments`,
-    method: 'GET',
-}).then((data) => {
-    model.commentList = data;
-});
+load('users')
+    .then((data) => {
+        model.userList = data;
+        return load('posts');
+    }).then((data) => {
+        model.postsList = data;
+        return load('comments');
+    }).then((data) => {
+        model.commentsList = data;
+        model.normalize();
+    });
