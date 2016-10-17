@@ -1,6 +1,11 @@
 const root = 'http://jsonplaceholder.typicode.com';
-const view = {};
-view.showUser = showUsers;
+const view = {
+    showUser: showUserList,
+    showPosts: showPostList,
+    showComment: showCommentList,
+    closeComment: closeCommentList,
+};
+
 
 const model = {
     userList: null,
