@@ -1,9 +1,19 @@
 const model = {
     userList: null,
     normalize() {
+        for (const post of this.postList) {
+            post.comments = [];
+            for (const comment of this.commentList) {
+                if (post.id === comment.postId) post.comments.push(comment);
+            }
+        }
+
         for (const user of this.userList) {
-            for (const post of this.postsList) {
-                if (user.id === post.userId) this.userList.posts = this.userList.posts.push(post);
+            user.posts = [];
+            for (const post of this.postList) {
+                if (user.id === post.userId) {
+                    user.posts.push(post);
+                }
             }
         }
     },
@@ -24,9 +34,9 @@ load('users')
         model.userList = data;
         return load('posts');
     }).then((data) => {
-        model.postsList = data;
+        model.postList = data;
         return load('comments');
     }).then((data) => {
-        model.commentsList = data;
+        model.commentList = data;
         model.normalize();
     });
