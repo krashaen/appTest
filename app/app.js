@@ -1,3 +1,7 @@
+const root = 'http://jsonplaceholder.typicode.com';
+const view = {};
+view.showUser = showUsers;
+
 const model = {
     userList: null,
     normalize() {
@@ -19,8 +23,7 @@ const model = {
     },
 };
 
-const root = 'http://jsonplaceholder.typicode.com';
-const view = {};
+
 
 function load(type) {
     return $.ajax({
@@ -39,4 +42,5 @@ load('users')
     }).then((data) => {
         model.commentList = data;
         model.normalize();
+        view.showUser(model.userList);
     });

@@ -1,12 +1,12 @@
-view.showUsers = function() {
+function showUsers(userList) {
 
     const userInfo = document.getElementsByClassName('users-list');
-    usersList.forEach(function(entry) {
+    userList.forEach(function (entry) {
         // try to slice to smaller functions
         const userWrapper = document.createElement('div');
         userWrapper.className = 'users-list__info';
         userInfo[0].appendChild(userWrapper);
-        userWrapper.onclick = view.showPost;
+        // userWrapper.onclick = view.showPost;
         userWrapper.setAttribute('id', entry.id);
 
         const userPhoto = document.createElement('div');
