@@ -1,5 +1,4 @@
 function showPostList(posts) {
-
     const parentBlok = document.getElementsByClassName('blog');
     let postBloks = document.getElementsByClassName('posts-list');
     postBloks[0].remove();
@@ -33,4 +32,5 @@ function showPostList(posts) {
         post.appendChild(commentBtn);
         commentBtn.onclick = view.showComment.bind(null, entry.id, entry.comments);
     });
-};
+}
+

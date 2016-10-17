@@ -28,8 +28,6 @@ const model = {
     },
 };
 
-
-
 function load(type) {
     return $.ajax({
         url: `${root}/${type}`,

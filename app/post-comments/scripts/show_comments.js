@@ -1,5 +1,4 @@
 function showCommentList(id, comments) {
-
     const commentBtn = document.getElementsByClassName('posts-list__send');
     const postBlock = document.getElementsByClassName('posts-list__post');
     comments.forEach((entry) => {
@@ -9,7 +8,7 @@ function showCommentList(id, comments) {
             if (postBlockId === id) {
                 const comment = document.createElement('div');
                 comment.className = 'post-comments';
-                comment.setAttribute('id', id)
+                comment.setAttribute('id', id);
                 postBlock[i].insertBefore(comment, postBlock[i].children[3]);
 
                 const commentTitle = document.createElement('h2');
@@ -29,7 +28,7 @@ function showCommentList(id, comments) {
                 UserEmail.textContent = entry.email;
                 commentUserEmail.appendChild(UserEmail);
                 commentBtn[i].textContent = 'Закрыть';
-                commentBtn[i].setAttribute('href', '#' + id );
+                commentBtn[i].setAttribute('href', `# ${id}`);
                 commentBtn[i].onclick = view.closeComment.bind(null, id, comments);
             }
         }
