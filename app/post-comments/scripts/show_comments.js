@@ -3,7 +3,7 @@ function showCommentList(id, comments) {
     const postBlock = document.getElementsByClassName('posts-list__post');
     comments.forEach((entry) => {
         // create coment block
-        for (let i = 0; i < postBlock.length; i++) {
+        for (let i = 0; i < postBlock.length; i += 1) {
             const postBlockId = parseInt(postBlock[i].getAttribute('id'), 10);
             if (postBlockId === id) {
                 const comment = document.createElement('div');

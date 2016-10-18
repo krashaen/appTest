@@ -2,7 +2,7 @@ function closeCommentList(id, comments) {
     const commentBtn = document.getElementsByClassName('posts-list__send');
     const postBlock = document.getElementsByClassName('posts-list__post');
     let deleteComment = document.querySelectorAll('.posts-list__post .post-comments');
-    for (let i = 0; i < postBlock.length; i++) {
+    for (let i = 0; i < postBlock.length; i += 1) {
         const postBlockId = parseInt(postBlock[i].getAttribute('id'), 10);
         if (postBlockId === id) {
             commentBtn[i].onclick = view.showComment.bind(null, id, comments);
