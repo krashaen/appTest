@@ -12,7 +12,6 @@ function createUserName(parent, userTitle) {
 }
 
 function showUserList(userList) {
-
     const userInfo = document.getElementsByClassName('users-list');
     userList.forEach((entry) => {
         const userWrapper = document.createElement('div');

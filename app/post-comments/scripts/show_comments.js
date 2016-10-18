@@ -28,7 +28,7 @@ function showCommentList(id, comments) {
                 UserEmail.textContent = entry.email;
                 commentUserEmail.appendChild(UserEmail);
                 commentBtn[i].textContent = 'Закрыть';
-                commentBtn[i].setAttribute('href', `# ${id}`);
+                commentBtn[i].setAttribute('href', `#${id}`);
                 commentBtn[i].onclick = view.closeComment.bind(null, id, comments);
             }
         }

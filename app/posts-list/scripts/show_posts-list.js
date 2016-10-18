@@ -33,4 +33,3 @@ function showPostList(posts) {
         commentBtn.onclick = view.showComment.bind(null, entry.id, entry.comments);
     });
 }
-
