@@ -11,18 +11,28 @@ function createUserName(parent, userTitle) {
     userName.textContent = userTitle;
 }
 
-function showUserList(userList) {
+function showUserList(userList, onUserClick) {
     const userInfo = document.getElementsByClassName('users-list');
     userList.forEach((entry) => {
         const userWrapper = document.createElement('div');
         userWrapper.className = 'users-list__info';
         userInfo[0].appendChild(userWrapper);
-        userWrapper.onclick = view.showPosts.bind(null, entry.posts);
+        userWrapper.onclick = onUserClick.bind(null, entry);
         userWrapper.setAttribute('id', entry.id);
 
-        createUserPhoto(userWrapper);
+        const photo = createUserPhoto();
+        const userName = createUserName(entry.name);
 
+        // 1
+        userWrapper.appendChild(photo);
+        userWrapper.appendChild(userName);
+
+        // 2
+        createUserPhoto(userWrapper);
         createUserName(userWrapper, entry.name);
     });
+
+    // TODO: return refs to DOM elems
+    return usersWrappersArray;
 }
 

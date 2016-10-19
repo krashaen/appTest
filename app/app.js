@@ -1,14 +1,9 @@
 const root = 'http://jsonplaceholder.typicode.com';
-const view = {
-    showUser: showUserList,
-    showPosts: showPostList,
-    showComment: showCommentList,
-    closeComment: closeCommentList,
-};
-
-
 const model = {
-    userList: null,
+    usersClickCounter: 0,
+    commentsList: null,
+    postsList: null,
+    usersList: null,
     normalize() {
         for (const post of this.postList) {
             post.comments = [];
@@ -27,6 +22,28 @@ const model = {
         }
     },
 };
+
+const view = {
+    // remove dependency on view from modules,
+    // create handlers for needed events on top level and pass it inside functions
+    onUserClick(user) {
+        model.usersClickCounter += 1;
+        this.showPosts(user.posts);
+    },
+
+    showUsers(users) {
+        showUserList(users, this.onUserClick);
+    },
+
+    /* eslint-disable */
+    showPosts: showPostList,
+    showComment: showCommentList,
+    closeComment: closeCommentList,
+    /* eslint-enable */
+};
+
+
+
 
 function load(type) {
     return $.ajax({

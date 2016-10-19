@@ -13,6 +13,7 @@ function showPostList(posts) {
         post.setAttribute('name', entry.id);
         post.setAttribute('id', entry.id);
 
+        // create post title
         const postTitle = document.createElement('h2');
         postTitle.className = 'posts-list__post-title';
         post.appendChild(postTitle);
