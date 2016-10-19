@@ -1,3 +1,25 @@
+function createPostTitle(post) {
+    const postTitle = document.createElement('h2');
+    postTitle.className = 'posts-list__post-title';
+    postTitle.textContent = post.title;
+    return postTitle;
+}
+
+function createPostDescription(post) {
+    const postDescr = document.createElement('p');
+    postDescr.className = 'posts-list__post-description';
+    postDescr.textContent = post.body;
+    return postDescr;
+}
+
+function createCommentBtn() {
+    const commentBtn = document.createElement('a');
+    commentBtn.className = 'posts-list__send';
+    commentBtn.textContent = 'Комментарии';
+    // commentBtn.onclick = view.showComment.bind(null, entry.id, entry.comments);
+    return commentBtn;
+}
+
 function showPostList(posts) {
     const parentBlok = document.getElementsByClassName('blog');
     let postBloks = document.getElementsByClassName('posts-list');
@@ -14,23 +36,16 @@ function showPostList(posts) {
         post.setAttribute('id', entry.id);
 
         // create post title
-        const postTitle = document.createElement('h2');
-        postTitle.className = 'posts-list__post-title';
+        const postTitle = createPostTitle(entry);
         post.appendChild(postTitle);
-        postTitle.textContent = entry.title;
 
         const postLine = document.createElement('hr');
         post.appendChild(postLine);
 
-        const postDescr = document.createElement('p');
-        postDescr.className = 'posts-list__post-description';
+        const postDescr = createPostDescription(entry);
         post.appendChild(postDescr);
-        postDescr.textContent = entry.body;
 
-        const commentBtn = document.createElement('a');
-        commentBtn.className = 'posts-list__send';
-        commentBtn.textContent = 'Комментарии';
+        const commentBtn = createCommentBtn();
         post.appendChild(commentBtn);
-        commentBtn.onclick = view.showComment.bind(null, entry.id, entry.comments);
     });
 }

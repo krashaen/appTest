@@ -1,38 +1,38 @@
-function createUserPhoto(parent) {
+function createUserPhoto() {
     const userPhoto = document.createElement('div');
     userPhoto.className = 'users-list__user-image';
-    parent.appendChild(userPhoto);
+    return userPhoto;
 }
 
-function createUserName(parent, userTitle) {
+function createUserName(userTitle) {
     const userName = document.createElement('div');
     userName.className = 'users-list__user-name';
-    parent.appendChild(userName);
     userName.textContent = userTitle;
+    return userName;
+}
+
+function createUserWrapper(user, onUserClick) {
+    const userWrapper = document.createElement('div');
+    userWrapper.className = 'users-list__info';
+    userWrapper.onclick = () => onUserClick(user);
+    userWrapper.setAttribute('id', user.id);
+    return userWrapper;
 }
 
 function showUserList(userList, onUserClick) {
     const userInfo = document.getElementsByClassName('users-list');
+    const usersWrappersArray = [];
     userList.forEach((entry) => {
-        const userWrapper = document.createElement('div');
-        userWrapper.className = 'users-list__info';
-        userInfo[0].appendChild(userWrapper);
-        userWrapper.onclick = onUserClick.bind(null, entry);
-        userWrapper.setAttribute('id', entry.id);
-
+        const userWrapper = createUserWrapper(entry, onUserClick);
         const photo = createUserPhoto();
         const userName = createUserName(entry.name);
 
-        // 1
+        userInfo[0].appendChild(userWrapper);
         userWrapper.appendChild(photo);
         userWrapper.appendChild(userName);
 
-        // 2
-        createUserPhoto(userWrapper);
-        createUserName(userWrapper, entry.name);
+        usersWrappersArray.push(userWrapper);
     });
-
-    // TODO: return refs to DOM elems
     return usersWrappersArray;
 }
 
