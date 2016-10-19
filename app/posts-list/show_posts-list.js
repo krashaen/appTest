@@ -12,15 +12,15 @@ function createPostDescription(post) {
     return postDescr;
 }
 
-function createCommentBtn() {
+function createCommentBtn(post, onCommentBtnClick) {
     const commentBtn = document.createElement('a');
     commentBtn.className = 'posts-list__send';
     commentBtn.textContent = 'Комментарии';
-    // commentBtn.onclick = view.showComment.bind(null, entry.id, entry.comments);
+    commentBtn.onclick = () => onCommentBtnClick(post.id, post.comments);
     return commentBtn;
 }
 
-function showPostList(posts) {
+function showPostList(posts, onCommentBtnClick) {
     const parentBlok = document.getElementsByClassName('blog');
     let postBloks = document.getElementsByClassName('posts-list');
     postBloks[0].remove();
@@ -35,7 +35,6 @@ function showPostList(posts) {
         post.setAttribute('name', entry.id);
         post.setAttribute('id', entry.id);
 
-        // create post title
         const postTitle = createPostTitle(entry);
         post.appendChild(postTitle);
 
@@ -45,7 +44,7 @@ function showPostList(posts) {
         const postDescr = createPostDescription(entry);
         post.appendChild(postDescr);
 
-        const commentBtn = createCommentBtn();
+        const commentBtn = createCommentBtn(entry, onCommentBtnClick);
         post.appendChild(commentBtn);
     });
 }

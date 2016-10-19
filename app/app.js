@@ -32,17 +32,22 @@ const model = {
 };
 
 const view = {
-    // remove dependency on view from modules,
-    // create handlers for needed events on top level and pass it inside functions
     onUserClick(user) {
         this.showPosts(user.posts);
+    },
+
+    onCommentBtnClick(id, comments) {
+        this.showComment(id, comments);
     },
 
     showUsers(users) {
         showUserList(users, this.onUserClick.bind(this));
     },
 
-    showPosts: showPostList,
+    showPosts(posts) {
+        showPostList(posts, this.onCommentBtnClick.bind(this));
+    },
+
     showComment: showCommentList,
     closeComment: closeCommentList,
 };
