@@ -13,10 +13,11 @@ function createPostDescription(post) {
 }
 
 function createCommentBtn(post, onCommentBtnClick) {
+    const flag = 1;
     const commentBtn = document.createElement('a');
     commentBtn.className = 'posts-list__send';
     commentBtn.textContent = 'Комментарии';
-    commentBtn.onclick = () => onCommentBtnClick(post.id, post.comments);
+    commentBtn.onclick = () => onCommentBtnClick(post.id, post.comments, flag);
     return commentBtn;
 }
 

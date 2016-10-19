@@ -36,8 +36,9 @@ const view = {
         this.showPosts(user.posts);
     },
 
-    onCommentBtnClick(id, comments) {
-        this.showComment(id, comments);
+    onCommentBtnClick(id, comments, flag) {
+        if (flag) this.showComment(id, comments);
+        else this.closeComment(id, comments);
     },
 
     showUsers(users) {
@@ -48,8 +49,12 @@ const view = {
         showPostList(posts, this.onCommentBtnClick.bind(this));
     },
 
-    showComment: showCommentList,
-    closeComment: closeCommentList,
+    showComment(id, comments) {
+        showCommentList(id, comments, this.onCommentBtnClick.bind(this));
+    },
+    closeComment(id, comments) {
+        closeCommentList(id, comments, this.onCommentBtnClick.bind(this));
+    },
 };
 
 model.load('users')

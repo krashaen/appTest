@@ -15,7 +15,6 @@ function createUserWrapper(user, onUserClick) {
     const userWrapper = document.createElement('div');
     userWrapper.className = 'users-list__info';
     userWrapper.onclick = () => onUserClick(user);
-    userWrapper.setAttribute('id', user.id);
     return userWrapper;
 }
 

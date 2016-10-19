@@ -31,7 +31,7 @@ function createUserAddress(email) {
     return userEmail;
 }
 
-function showCommentList(id, comments) {
+function showCommentList(id, comments, onCommentBtnClick) {
     const commentBtn = document.getElementsByClassName('posts-list__send');
     const postBlock = document.getElementsByClassName('posts-list__post');
     comments.forEach((entry) => {
@@ -56,7 +56,7 @@ function showCommentList(id, comments) {
 
                 commentBtn[i].textContent = 'Закрыть';
                 commentBtn[i].setAttribute('href', `#${id}`);
-                commentBtn[i].onclick = view.closeComment.bind(null, id, comments);
+                commentBtn[i].onclick = () => onCommentBtnClick(id, comments);
             }
         }
     });
