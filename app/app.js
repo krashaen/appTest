@@ -5,11 +5,25 @@ const model = {
     postsList: null,
     usersList: null,
 
-    load(type) {
+    loadEntities(type) {
         return $.ajax({
             url: `${root}/${type}`,
             method: 'GET',
         });
+    },
+
+    loadData() {
+        return this.loadEntities('users')
+            .then((data) => {
+                this.usersList = data;
+                return this.loadEntities('posts');
+            }).then((data) => {
+                this.postsList = data;
+                return this.loadEntities('comments');
+            }).then((data) => {
+                this.commentsList = data;
+                this.normalize();
+            });
     },
 
     normalize() {
@@ -57,15 +71,5 @@ const view = {
     },
 };
 
-model.load('users')
-    .then((data) => {
-        model.usersList = data;
-        return model.load('posts');
-    }).then((data) => {
-        model.postsList = data;
-        return model.load('comments');
-    }).then((data) => {
-        model.commentsList = data;
-        model.normalize();
-        view.showUsers(model.usersList);
-    });
+model.loadData()
+    .then(() => view.showUsers(model.usersList));

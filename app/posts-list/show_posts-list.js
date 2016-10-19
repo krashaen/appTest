@@ -17,7 +17,8 @@ function createCommentBtn(post, onCommentBtnClick) {
     const commentBtn = document.createElement('a');
     commentBtn.className = 'posts-list__send';
     commentBtn.textContent = 'Комментарии';
-    commentBtn.onclick = () => onCommentBtnClick(post.id, post.comments, flag);
+    commentBtn.onclick = () =>
+        onCommentBtnClick(post.id, post.comments, flag);
     return commentBtn;
 }
 
