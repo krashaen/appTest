@@ -1,30 +1,47 @@
-const root = 'http://jsonplaceholder.typicode.com';
+const root = 'http://jsonplaceholder.typicode.com/';
 const model = {
     usersClickCounter: 0,
     commentsList: null,
     postsList: null,
     usersList: null,
 
-    loadEntities(type) {
-        return $.ajax({
-            url: `${root}/${type}`,
-            method: 'GET',
-        });
-    },
+    // loadEntities(type) {
+    //     return $.ajax({
+    //         url: `${root}/${type}`,
+    //         method: 'GET',
+    //     });
+    // },
 
-    loadData() {
-        return this.loadEntities('users')
-            .then((data) => {
-                this.usersList = data;
-                return this.loadEntities('posts');
-            }).then((data) => {
-                this.postsList = data;
-                return this.loadEntities('comments');
-            }).then((data) => {
-                this.commentsList = data;
-                this.normalize();
-            });
-    },
+    loadData(url) {
+        // Возвращает новый промис
+        return new Promise(function(resolve, reject) {
+            // Стандартный XHR запрос
+            var req = new XMLHttpRequest();
+            req.open('GET', url);
+
+            req.onload = function() {
+            // Этот метод вызовется, даже в случае 404 ошибки
+            // так что проверяем код ответа
+            if (req.status == 200) {
+                // выполняем «resolve» промиса с полученным текстом
+                resolve(JSON.parse(req.response));
+            }
+            else {
+                // иначе вызываем «reject» с текстом статуса
+                // который, возможно, даст представление об ошибке
+                reject(Error(req.statusText));
+            }
+            };
+
+            // Обрабатываем ошибки сети
+            req.onerror = function() {
+            reject(Error("Сетевая ошибка"));
+            };
+
+            // Выполняем запрос
+            req.send();
+        });
+        },
 
     normalize() {
         for (const post of this.postsList) {
@@ -71,5 +88,10 @@ const view = {
     },
 };
 
-model.loadData()
-    .then(() => view.showUsers(model.usersList));
+model.loadData(root + 'users').then(function(response) {
+  view.showUsers(response);
+}, function(error) {
+  console.error("Не удалось выполнить!", error);
+});
+//model.loadData.then(view.showUsers(model.usersList))
+    //  .then(() => view.showUsers(model.usersList));
