@@ -5,13 +5,6 @@ const model = {
     postsList: null,
     usersList: null,
 
-    // loadEntities(type) {
-    //     return $.ajax({
-    //         url: `${root}/${type}`,
-    //         method: 'GET',
-    //     });
-    // },
-
     loadEntities(url) {
         return new Promise(function(resolve, reject) {
             var req = new XMLHttpRequest();
@@ -44,6 +37,7 @@ const model = {
                 this.normalize();
             });
     },
+
     normalize() {
         for (const post of this.postsList) {
             post.comments = [];
